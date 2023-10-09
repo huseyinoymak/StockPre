@@ -649,7 +649,7 @@ def cooling_highlight_2(val):
 Temel_Veriler_1, Temel_Veriler_2, Finansallar, Karlılık, BlcDnm=Hisse_Temel_Veriler(Hisse_Adı[0])
 Karlılık, Büyüme, Borcluluk,=Hisse_Karne(Hisse_Adı[0],Finansallar,Karlılık,BlcDnm)
 Degerleme_1, Degerleme_2 =Degerleme(Temel_Veriler_1,Temel_Veriler_2)
-Hisse_Ozet_Aylık,Hisse_Ozet_Ceyrek=Hisse_Tarihsel(Hisse_Adı[0])
+#Hisse_Ozet_Aylık,Hisse_Ozet_Ceyrek=Hisse_Tarihsel(Hisse_Adı[0])
 
 Headers = Karlılık.iloc[0]
 Karlılık = Karlılık[1:]
@@ -667,13 +667,13 @@ Degerleme_1.columns = Headers
 Degerleme_2=Degerleme_2[1:]
 Degerleme_2.columns = Headers
 
-Sapmalar=Hisse_Ozet_Aylık.tail(3).drop(['Yıllar'],axis=1)
-Sapmalar=Sapmalar.head(2)
-Ortalama=Sapmalar.head(1)
+#Sapmalar=Hisse_Ozet_Aylık.tail(3).drop(['Yıllar'],axis=1)
+#Sapmalar=Sapmalar.head(2)
+#Ortalama=Sapmalar.head(1)
 
-Sapmalar_2=Hisse_Ozet_Ceyrek.tail(3).drop(['Yıllar'],axis=1)
-Sapmalar_2=Sapmalar_2.head(2)
-Ortalama_2=Sapmalar_2.head(1)
+#Sapmalar_2=Hisse_Ozet_Ceyrek.tail(3).drop(['Yıllar'],axis=1)
+#Sapmalar_2=Sapmalar_2.head(2)
+#Ortalama_2=Sapmalar_2.head(1)
 
 st.header(str(Hisse_Adı[0])+' Dönem: '+str(BlcDnm)+' Temel Analiz Değerlendirmesi')
 col1, col2 ,col3=st.columns(3)
