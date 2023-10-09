@@ -651,15 +651,13 @@ Temel_Veriler_1, Temel_Veriler_2, Finansallar, Karlılık, BlcDnm=Hisse_Temel_Ve
 Degerleme_1, Degerleme_2 =Degerleme(Temel_Veriler_1,Temel_Veriler_2)
 #Hisse_Ozet_Aylık,Hisse_Ozet_Ceyrek=Hisse_Tarihsel(Hisse_Adı[0])
 
-Headers = Karlılık.iloc[0]
-Karlılık = Karlılık[1:]
-Karlılık.columns = Headers
-
-Büyüme = Büyüme[1:]
-Büyüme.columns = Headers
-
-Borcluluk = Borcluluk[1:]
-Borcluluk.columns = Headers
+#Headers = Karlılık.iloc[0]
+#Karlılık = Karlılık[1:]
+#Karlılık.columns = Headers
+#Büyüme = Büyüme[1:]
+#Büyüme.columns = Headers
+#Borcluluk = Borcluluk[1:]
+#Borcluluk.columns = Headers
 
 Degerleme_1=Degerleme_1[1:]
 Degerleme_1.columns = Headers
