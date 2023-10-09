@@ -651,15 +651,15 @@ Temel_Veriler_1, Temel_Veriler_2, Finansallar, Karlılık, BlcDnm=Hisse_Temel_Ve
 Degerleme_1, Degerleme_2 =Degerleme(Temel_Veriler_1,Temel_Veriler_2)
 #Hisse_Ozet_Aylık,Hisse_Ozet_Ceyrek=Hisse_Tarihsel(Hisse_Adı[0])
 
-#Headers = Karlılık.iloc[0]
-#Karlılık = Karlılık[1:]
-#Karlılık.columns = Headers
+Headers = Karlılık.iloc[0]
+Karlılık = Karlılık[1:]
+Karlılık.columns = Headers
 
-#Büyüme = Büyüme[1:]
-#Büyüme.columns = Headers
+Büyüme = Büyüme[1:]
+Büyüme.columns = Headers
 
-#Borcluluk = Borcluluk[1:]
-#Borcluluk.columns = Headers
+Borcluluk = Borcluluk[1:]
+Borcluluk.columns = Headers
 
 Degerleme_1=Degerleme_1[1:]
 Degerleme_1.columns = Headers
@@ -676,7 +676,7 @@ Degerleme_2.columns = Headers
 #Ortalama_2=Sapmalar_2.head(1)
 
 st.header(str(Hisse_Adı[0])+' Dönem: '+str(BlcDnm)+' Temel Analiz Değerlendirmesi')
-col1, col2 ,col3=st.columns(3)
+col1, col2, col3 = st.columns(3)
 with col1:
     st.metric(label="Güncel Fiyat", value=Degerleme_1.iat[7,0])
 with col2:
@@ -689,11 +689,9 @@ with col3:
 #with col1:
 #    st.subheader('Karlılık')
 #    st.dataframe(Karlılık.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
-
 #with col2:
 #   st.subheader('Büyüme')
 #   st.dataframe(Büyüme.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
-
 #with col3:
 #   st.subheader('Borçluluk')
 #   st.dataframe(Borcluluk.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)   
