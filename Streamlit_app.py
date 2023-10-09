@@ -679,26 +679,24 @@ st.header(str(Hisse_Adı[0])+' Dönem: '+str(BlcDnm)+' Temel Analiz Değerlendir
 col1, col2 ,col3=st.columns(3)
 with col1:
     st.metric(label="Güncel Fiyat", value=Degerleme_1.iat[7,0])
-
 with col2:
     st.metric(label="Yıllıklandırılmış Verilere Göre Değerleme", value=Degerleme_1.iat[38,0], delta=Degerleme_1.iat[39,0])
-
 with col3:
     st.metric(label="Tahmini Yıl Sonu Verilerine Göre Değerleme", value=Degerleme_2.iat[38,0], delta=Degerleme_2.iat[39,0])
     
-st.header('Hisse Karnesi')
-col1, col2 , col3= st.columns(3)
-with col1:
-    st.subheader('Karlılık')
-    st.dataframe(Karlılık.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
+#st.header('Hisse Karnesi')
+#col1, col2 , col3= st.columns(3)
+#with col1:
+#    st.subheader('Karlılık')
+#    st.dataframe(Karlılık.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
 
-with col2:
-   st.subheader('Büyüme')
-   st.dataframe(Büyüme.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
+#with col2:
+#   st.subheader('Büyüme')
+#   st.dataframe(Büyüme.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
 
-with col3:
-   st.subheader('Borçluluk')
-   st.dataframe(Borcluluk.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)   
+#with col3:
+#   st.subheader('Borçluluk')
+#   st.dataframe(Borcluluk.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)   
 
 #st.header('Hisse Geçmiş Yıllar Aylık Bazlı Ortalama Getiri')
 #st.dataframe(Hisse_Ozet_Aylık[:-3].style.applymap(cooling_highlight_1, subset=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık']),use_container_width=True)
