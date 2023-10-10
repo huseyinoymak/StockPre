@@ -233,7 +233,7 @@ def Hisse_Temel_Veriler(Hisse):
       return Temel_Veriler_1, Temel_Veriler_2
 
     driver.quit()
-    return Temel_Veriler_1 , Temel_Veriler_2 ,Finansallar, Karlılık,BlcDnm
+    return Temel_Veriler_1 , Temel_Veriler_2 ,Finansallar, Karlılık, BlcDnm
 
 def Hisse_Karne(Hisse,Finansallar,Karlılık,BlcDnm):
    #Karlılık Karnesi
@@ -651,7 +651,7 @@ Karlılık, Büyüme, Borcluluk,=Hisse_Karne(Hisse_Adı[0],Finansallar,Karlılı
 Degerleme_1, Degerleme_2 =Degerleme(Temel_Veriler_1,Temel_Veriler_2)
 #Hisse_Ozet_Aylık,Hisse_Ozet_Ceyrek=Hisse_Tarihsel(Hisse_Adı[0])
 
-Headers = Karlılık.iloc[0]
+#Headers = Karlılık.iloc[0]
 #Karlılık = Karlılık[1:]
 #Karlılık.columns = Headers
 #Büyüme = Büyüme[1:]
@@ -659,6 +659,7 @@ Headers = Karlılık.iloc[0]
 #Borcluluk = Borcluluk[1:]
 #Borcluluk.columns = Headers
 
+Headers = Degerleme_1.iloc[0]
 Degerleme_1=Degerleme_1[1:]
 Degerleme_1.columns = Headers
 
