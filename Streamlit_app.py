@@ -647,7 +647,7 @@ def cooling_highlight_2(val):
     return f'background-color: {color}'
 
 Temel_Veriler_1, Temel_Veriler_2, Finansallar, Karlılık, BlcDnm=Hisse_Temel_Veriler(Hisse_Adı[0])
-Karlılık, Büyüme, Borcluluk,=Hisse_Karne(Hisse_Adı[0],Finansallar,Karlılık,BlcDnm)
+#Karlılık, Büyüme, Borcluluk,=Hisse_Karne(Hisse_Adı[0],Finansallar,Karlılık,BlcDnm)
 Degerleme_1, Degerleme_2 =Degerleme(Temel_Veriler_1,Temel_Veriler_2)
 #Hisse_Ozet_Aylık,Hisse_Ozet_Ceyrek=Hisse_Tarihsel(Hisse_Adı[0])
 
