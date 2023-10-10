@@ -20,7 +20,6 @@ options.add_argument('--log-level=3')
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--ignore-ssl-errors')
 options.add_argument("--disable-extensions")
-options.add_argument("--disable-gpu")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(service=Service(ChromeDriverManager(driver_version='116.0.5845.96').install()), options=options)
@@ -64,7 +63,7 @@ with st.sidebar:
 
 def Hisse_Temel_Veriler(Hisse):
     driver.get('https://analizim.halkyatirim.com.tr/Financial/ScoreCardDetail?hisseKod='+Hisse)
-    driver.implicitly_wait(20)
+    driver.implicitly_wait(10)
     
     BlcDnm=driver.find_element(By.XPATH,'/html/body/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/span[2]/strong').text            #Hissenin Bilanco Dönemi
     SnFyt=driver.find_element(By.XPATH,'/html/body/div[2]/div[2]/div/div[1]/div[2]/div[3]/div[1]/div/div[2]/div[1]').text
