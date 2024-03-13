@@ -23,8 +23,7 @@ options.add_argument("--disable-extensions")
 options.add_argument("--disable-gpu")
 options.add_argument("--disable-dev-shm-usage")
 options.add_argument("--no-sandbox")
-driver = webdriver.Chrome(service=Service(ChromeDriverManager(driver_version='116.0.5845.96').install()), options=options)
-
+driver = webdriver.Chrome(service=Service(ChromeDriverManager(driver_version='120.0.6099.224').install()), options=options)
 Temel_Veriler_1=pd.DataFrame()
 Temel_Veriler_2=pd.DataFrame()
 Finansallar=pd.DataFrame()
@@ -64,7 +63,7 @@ with st.sidebar:
 
 def Hisse_Temel_Veriler(Hisse):
     driver.get('https://analizim.halkyatirim.com.tr/Financial/ScoreCardDetail?hisseKod='+Hisse)
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(20)
     
     BlcDnm=driver.find_element(By.XPATH,'/html/body/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/span[2]/strong').text            #Hissenin Bilanco Dönemi
     SnFyt=driver.find_element(By.XPATH,'/html/body/div[2]/div[2]/div/div[1]/div[2]/div[3]/div[1]/div/div[2]/div[1]').text
@@ -233,7 +232,7 @@ def Hisse_Temel_Veriler(Hisse):
       return Temel_Veriler_1, Temel_Veriler_2
 
     driver.quit()
-    return Temel_Veriler_1 , Temel_Veriler_2 ,Finansallar, Karlılık, BlcDnm
+    return Temel_Veriler_1 , Temel_Veriler_2 ,Finansallar, Karlılık,BlcDnm
 
 def Hisse_Karne(Hisse,Finansallar,Karlılık,BlcDnm):
    #Karlılık Karnesi
@@ -533,10 +532,10 @@ def Degerleme(Temel_Veriler_1,Temel_Veriler_2):
     Degerleme_2['Degerleme 7'] = Degerleme_2['Degerleme 7'].apply(lambda x: round(x, 2))
 
     #Model 8 = Hisse_Fiyatı/(Sirket_PDDD)*Sektör_PDDD ve Hisse_Fiyatı/(Sirket_PDDD)*Bist_PDDD
-    Degerleme_1['Degerleme 8'] = (Degerleme_1['Fiyat']/Degerleme_1['Cari PD/DD'])*Degerleme_1['Sektör PD/DD']+(Degerleme_1['Fiyat']/Degerleme_1['Cari PD/DD']*Degerleme_1['BIST PD/DD'])/2
+    Degerleme_1['Degerleme 8'] = ((Degerleme_1['Fiyat']/Degerleme_1['Cari PD/DD'])*Degerleme_1['Sektör PD/DD']+(Degerleme_1['Fiyat']/Degerleme_1['Cari PD/DD']*Degerleme_1['BIST PD/DD']))/2
     Degerleme_1['Degerleme 8'] = Degerleme_1['Degerleme 8'].apply(lambda x: round(x, 2))
 
-    Degerleme_2['Degerleme 8'] = (Degerleme_2['Fiyat']/Degerleme_2['Cari PD/DD'])*Degerleme_2['Sektör PD/DD']+(Degerleme_2['Fiyat']/Degerleme_2['Cari PD/DD']*Degerleme_2['BIST PD/DD'])/2
+    Degerleme_2['Degerleme 8'] = ((Degerleme_2['Fiyat']/Degerleme_2['Cari PD/DD'])*Degerleme_2['Sektör PD/DD']+(Degerleme_2['Fiyat']/Degerleme_2['Cari PD/DD']*Degerleme_2['BIST PD/DD']))/2
     Degerleme_2['Degerleme 8'] = Degerleme_2['Degerleme 8'].apply(lambda x: round(x, 2))
 
     #Model 9 = Hisse_Fiyatı/(Şirket_FK)*Tarihsel_FK
@@ -586,11 +585,8 @@ def Hisse_Tarihsel(Hisse):
     Temmuz = list(Hisse[Hisse.index.month == 7]['Yüzde'])[::-1]
     Agustos = list(Hisse[Hisse.index.month == 8]['Yüzde'])[::-1]
     Eylül = list(Hisse[Hisse.index.month == 9]['Yüzde'])[::-1]
-    Eylül.insert(0, np.nan)
     Ekim = list(Hisse[Hisse.index.month == 10]['Yüzde'])[::-1]
-    Ekim.insert(0, np.nan)
     Kasım = list(Hisse[Hisse.index.month == 11]['Yüzde'])[::-1]
-    Kasım.insert(0, np.nan)
     Aralık = list(Hisse[Hisse.index.month == 12]['Yüzde'])[::-1]
     Aralık.insert(0, np.nan)
 
@@ -647,70 +643,76 @@ def cooling_highlight_2(val):
     return f'background-color: {color}'
 
 Temel_Veriler_1, Temel_Veriler_2, Finansallar, Karlılık, BlcDnm=Hisse_Temel_Veriler(Hisse_Adı[0])
-#Karlılık, Büyüme, Borcluluk,=Hisse_Karne(Hisse_Adı[0],Finansallar,Karlılık,BlcDnm)
+Karlılık, Büyüme, Borcluluk,=Hisse_Karne(Hisse_Adı[0],Finansallar,Karlılık,BlcDnm)
 Degerleme_1, Degerleme_2 =Degerleme(Temel_Veriler_1,Temel_Veriler_2)
-#Hisse_Ozet_Aylık,Hisse_Ozet_Ceyrek=Hisse_Tarihsel(Hisse_Adı[0])
+Hisse_Ozet_Aylık,Hisse_Ozet_Ceyrek=Hisse_Tarihsel(Hisse_Adı[0])
 
-#Headers = Karlılık.iloc[0]
-#Karlılık = Karlılık[1:]
-#Karlılık.columns = Headers
-#Büyüme = Büyüme[1:]
-#Büyüme.columns = Headers
-#Borcluluk = Borcluluk[1:]
-#Borcluluk.columns = Headers
+Headers = Karlılık.iloc[0]
+Karlılık = Karlılık[1:]
+Karlılık.columns = Headers
 
-Headers = Degerleme_1.iloc[0]
+Büyüme = Büyüme[1:]
+Büyüme.columns = Headers
+
+Borcluluk = Borcluluk[1:]
+Borcluluk.columns = Headers
+
 Degerleme_1=Degerleme_1[1:]
 Degerleme_1.columns = Headers
 
 Degerleme_2=Degerleme_2[1:]
 Degerleme_2.columns = Headers
 
-#Sapmalar=Hisse_Ozet_Aylık.tail(3).drop(['Yıllar'],axis=1)
-#Sapmalar=Sapmalar.head(2)
-#Ortalama=Sapmalar.head(1)
+Sapmalar=Hisse_Ozet_Aylık.tail(3).drop(['Yıllar'],axis=1)
+Sapmalar=Sapmalar.head(2)
+Ortalama=Sapmalar.head(1)
 
-#Sapmalar_2=Hisse_Ozet_Ceyrek.tail(3).drop(['Yıllar'],axis=1)
-#Sapmalar_2=Sapmalar_2.head(2)
-#Ortalama_2=Sapmalar_2.head(1)
+Sapmalar_2=Hisse_Ozet_Ceyrek.tail(3).drop(['Yıllar'],axis=1)
+Sapmalar_2=Sapmalar_2.head(2)
+Ortalama_2=Sapmalar_2.head(1)
 
 st.header(str(Hisse_Adı[0])+' Dönem: '+str(BlcDnm)+' Temel Analiz Değerlendirmesi')
-col1, col2, col3 = st.columns(3)
+col1, col2 ,col3=st.columns(3)
 with col1:
     st.metric(label="Güncel Fiyat", value=Degerleme_1.iat[7,0])
+
 with col2:
     st.metric(label="Yıllıklandırılmış Verilere Göre Değerleme", value=Degerleme_1.iat[38,0], delta=Degerleme_1.iat[39,0])
+
 with col3:
     st.metric(label="Tahmini Yıl Sonu Verilerine Göre Değerleme", value=Degerleme_2.iat[38,0], delta=Degerleme_2.iat[39,0])
     
-#st.header('Hisse Karnesi')
-#col1, col2 , col3= st.columns(3)
-#with col1:
-#    st.subheader('Karlılık')
-#    st.dataframe(Karlılık.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
-#with col2:
-#   st.subheader('Büyüme')
-#   st.dataframe(Büyüme.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
-#with col3:
-#   st.subheader('Borçluluk')
-#   st.dataframe(Borcluluk.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)   
+st.header('Hisse Karnesi')
+col1, col2 , col3= st.columns(3)
+with col1:
+    st.subheader('Karlılık')
+    st.dataframe(Karlılık.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
 
-#st.header('Hisse Geçmiş Yıllar Aylık Bazlı Ortalama Getiri')
-#st.dataframe(Hisse_Ozet_Aylık[:-3].style.applymap(cooling_highlight_1, subset=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık']),use_container_width=True)
+with col2:
+   st.subheader('Büyüme')
+   st.dataframe(Büyüme.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
 
-#st.header('Hisse Geçmiş Yıllar Hisse Aylık Ortalamalar')
-#st.dataframe(Sapmalar.style.applymap(cooling_highlight_1, subset=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık']),use_container_width=True)
+with col3:
+   st.subheader('Borçluluk')
+   st.dataframe(Borcluluk.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)   
 
-#st.header('Hisse Geçmiş Yıllar Çeyreklik Bazlı Ortalama Getiri')
-#st.dataframe(Hisse_Ozet_Ceyrek[:-3].style.applymap(cooling_highlight_1, subset=['Q1','Q2','Q3','Q4']),use_container_width=True)
 
-#st.header('Hisse Geçmiş Yıllar Çeyreklik Ortalamalar')
-#st.dataframe(Sapmalar_2.style.applymap(cooling_highlight_1, subset=['Q1','Q2','Q3','Q4']),use_container_width=True)
+st.header('Hisse Geçmiş Yıllar Aylık Bazlı Ortalama Getiri')
+st.dataframe(Hisse_Ozet_Aylık[:-3].style.applymap(cooling_highlight_1, subset=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık']),use_container_width=True)
 
-#col1, col2 = st.columns(2)
-#with col1:
-#    st.subheader('Yıllıklandırılmış Verilere Göre')
-#    st.dataframe(Degerleme_1.iloc[2:].style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True,height=1500)
-#with col2:
-#   st.subheader('Tahmini Yıl Sonu Verilerine Göre')
-#   st.dataframe(Degerleme_2.iloc[2:].style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True,height=1500)
+st.header('Hisse Geçmiş Yıllar Hisse Aylık Ortalamalar')
+st.dataframe(Sapmalar.style.applymap(cooling_highlight_1, subset=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık']),use_container_width=True)
+
+st.header('Hisse Geçmiş Yıllar Çeyreklik Bazlı Ortalama Getiri')
+st.dataframe(Hisse_Ozet_Ceyrek[:-3].style.applymap(cooling_highlight_1, subset=['Q1','Q2','Q3','Q4']),use_container_width=True)
+
+st.header('Hisse Geçmiş Yıllar Çeyreklik Ortalamalar')
+st.dataframe(Sapmalar_2.style.applymap(cooling_highlight_1, subset=['Q1','Q2','Q3','Q4']),use_container_width=True)
+
+col1, col2 = st.columns(2)
+with col1:
+    st.subheader('Yıllıklandırılmış Verilere Göre')
+    st.dataframe(Degerleme_1.iloc[2:].style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True,height=1500)
+with col2:
+   st.subheader('Tahmini Yıl Sonu Verilerine Göre')
+   st.dataframe(Degerleme_2.iloc[2:].style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True,height=1500)
