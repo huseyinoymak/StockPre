@@ -639,8 +639,8 @@ def cooling_highlight_1(val):
     return f'background-color: {color}'
 
 def cooling_highlight_2(val):
-    color = '#ff3300' if val=='Negatif'  else '#00ff00'
-    return f'background-color: #ff3300'
+    color = 'background-color: #ff3300' if val=='Negatif'  else 'background-color: #00ff00'
+    return color
 
 Temel_Veriler_1, Temel_Veriler_2, Finansallar, Karlılık, BlcDnm=Hisse_Temel_Veriler(Hisse_Adı[0])
 Karlılık, Büyüme, Borcluluk,=Hisse_Karne(Hisse_Adı[0],Finansallar,Karlılık,BlcDnm)
