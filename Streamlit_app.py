@@ -686,15 +686,15 @@ st.header('Hisse Karnesi')
 col1, col2 , col3= st.columns(3)
 with col1:
     st.subheader('Karlılık')
-    st.dataframe(Karlılık.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
+    #st.dataframe(Karlılık.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
 
 with col2:
    st.subheader('Büyüme')
-   st.dataframe(Büyüme.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
+   #st.dataframe(Büyüme.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)
 
 with col3:
    st.subheader('Borçluluk')
-   st.dataframe(Borcluluk.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)   
+   #st.dataframe(Borcluluk.style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True)   
 
 
 st.header('Hisse Geçmiş Yıllar Aylık Bazlı Ortalama Getiri')
@@ -712,7 +712,7 @@ st.dataframe(Sapmalar_2.style.applymap(cooling_highlight_1, subset=['Q1','Q2','Q
 col1, col2 = st.columns(2)
 with col1:
     st.subheader('Yıllıklandırılmış Verilere Göre')
-    st.dataframe(Degerleme_1.iloc[2:].style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True,height=1500)
+    #st.dataframe(Degerleme_1.iloc[2:].style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True,height=1500)
 with col2:
    st.subheader('Tahmini Yıl Sonu Verilerine Göre')
-   st.dataframe(Degerleme_2.iloc[2:].style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True,height=1500)
+   #st.dataframe(Degerleme_2.iloc[2:].style.applymap(cooling_highlight_2,subset=[Hisse_Adı[0]]),use_container_width=True,height=1500)
